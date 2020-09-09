@@ -36,6 +36,7 @@ public class ClientServiceTest {
     public ClientServiceTest() {
     }
 
+    //тестирует создание клиент
     @Test
     public void createClient(){
         ClientRequest clientRequest = new ClientRequest("First", "Second", "Patronymic");
@@ -46,6 +47,7 @@ public class ClientServiceTest {
         assertThat(client.getId()).isNotNull();
     }
 
+    //тестирует изменение клиента
     @Test
     public void updateClient(){
         ClientRequest clientRequest = new ClientRequest("Talap", "Kurmanov", "Muratovich");

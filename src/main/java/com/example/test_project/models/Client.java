@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import javax.persistence.*;
+import java.util.List;
 
 @ApiModel(description = "Model of tickets user for parking")
 @Entity
@@ -35,5 +36,10 @@ public class Client extends AuditModel{
     @ApiModelProperty(notes = "Отчество клиента")
     private String patronymic;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.REMOVE)
+    private List<ContactDetails> contactDetails;
 
+
+    public Client(String firstName, String secondName, String patronymic) {
+    }
 }

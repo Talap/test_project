@@ -1,8 +1,10 @@
 package com.example.test_project.repository;
 
 
+import com.example.test_project.models.Client;
 import com.example.test_project.models.ContactDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,5 +14,4 @@ public interface ContactDetailsRepository extends JpaRepository<ContactDetails, 
 
     ContactDetails findFirstByIdAndDeletedAtIsNull(Long id);
     List<ContactDetails> findAllByClientId(Long id);
-
 }

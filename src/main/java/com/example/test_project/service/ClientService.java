@@ -1,6 +1,7 @@
 package com.example.test_project.service;
 
 import com.example.test_project.models.Client;
+import com.example.test_project.models.ContactDetails;
 import com.example.test_project.models.Requests.ClientRequest;
 import com.example.test_project.models.responses.ClientResponse;
 
@@ -12,4 +13,6 @@ public interface ClientService {
     Client updateClient (ClientRequest clientRequest, Long id);
     List<ClientResponse> getAllClients();
     void deleteClientById(Long id);
+//    ClientResponse getClientWithAllContactInfo(Long clientId);
+    Client getClientWithAllContactInfo(Long clientId);
 }

@@ -32,6 +32,4 @@ public class ContactType {
     @Column(name="phone_type")
     @ApiModelProperty(notes = "Тип номера телефона")
     private String phoneType;
-
-
 }

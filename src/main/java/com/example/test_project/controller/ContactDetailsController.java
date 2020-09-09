@@ -45,4 +45,5 @@ public class ContactDetailsController extends BaseController {
                 .builder().message("deleted")
                 .build(), HttpStatus.OK);
     }
+
 }

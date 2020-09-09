@@ -48,7 +48,7 @@ public class ClientServiceImpl implements ClientService {
         List<ContactDetails> contactDetailsList = contactDetailsRepository.findAll();
         List<ContactDetailResponse> contactDetailResponseList = contactDetailsList.stream()
                 .map((e) -> ContactDetailResponse.builder()
-                .contactType(e.getContactType().getPhoneType())
+//                .contactType(e.getContactType().getPhoneType())
                 .phoneNumber(e.getTelephoneNumber())
                 .clientId(e.getClient().getId())
                 .build())
@@ -70,18 +70,72 @@ public class ClientServiceImpl implements ClientService {
         return clientResponses;
     }
 
+
     @Override
     public void deleteClientById(Long id) {
         Optional<Client> client = Optional.ofNullable(clientRepository.findById(id).
                 orElseThrow(() -> new ServiceException(id)));
-        List<ContactDetails> contactDetailsList =
-                contactDetailsRepository.findAllByClientId(client.get().getId());
-        for (ContactDetails contactDetails : contactDetailsList) {
-            contactDetailsRepository.delete(contactDetails);
-        }
+//        List<ContactDetails> contactDetailsList =
+//                contactDetailsRepository.findAllByClientId(client.get().getId());
+//        for (ContactDetails contactDetails : contactDetailsList) {
+//            contactDetailsRepository.delete(contactDetails);
+//        }
         clientRepository.delete(client.get());
     }
 
+//    @Override
+//    public ClientResponse getClientWithAllContactInfo(Long clientId) {
+//        Client client = clientRepository.findFirstById(clientId);
+//        List<ContactDetails> contactDetailsList = contactDetailsRepository.findAllByClientId(clientId);
+//
+//        List<ContactDetailResponse> contactDetailResponseList = contactDetailsList.stream()
+//                .map((e) -> ContactDetailResponse.builder()
+////                        .contactType(e.getContactType().getPhoneType())
+//                        .phoneNumber(e.getTelephoneNumber())
+//                        .clientId(e.getClient().getId())
+//                        .build())
+//                .collect(Collectors.toList());
+//
+//        ClientResponse clientResponse = ClientResponse.builder()
+//                .clientId(client.getId())
+//                .firstName(client.getFirstName())
+//                .secondName(client.getSecondName())
+//                .patronymic(client.getPatronymic())
+//                .contactDetails(contactDetailResponseList)
+//                .build();
+//        return clientResponse;
+//    }
+
+//    @Override
+//    public ClientResponse getClientWithAllContactInfo(Long clientId) {
+//        Client client = clientRepository.findFirstById(clientId);
+//        List<ContactDetailResponse> contactDetailResponseList = new ArrayList<>();
+//        List<ContactDetails> contactDetailsList = client.getContactDetails();
+//        for(ContactDetails contactDetails: contactDetailsList){
+//            ContactDetailResponse contactDetailResponse = new ContactDetailResponse(
+//                    contactDetails.getTelephoneNumber(),
+//                    contactDetails.getContactType().getPhoneType(),
+//                    clientId);
+//            contactDetailResponseList.add(contactDetailResponse);
+//        }
+//        ClientResponse clientResponse = new ClientResponse(clientId,
+//                client.getFirstName(),
+//                client.getSecondName(),
+//                client.getPatronymic(),
+//                contactDetailResponseList);
+//        return clientResponse;
+//    }
+
+
+    //Выше расположен еще один способ с использованием response для отсеивания лишних атрибутов
+    @Override
+    public Client getClientWithAllContactInfo(Long clientId) {
+        Client client = clientRepository.findFirstById(clientId);
+        return client;
     }
+
+
+}
+
 
 

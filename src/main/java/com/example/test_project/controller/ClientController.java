@@ -29,7 +29,7 @@ public class ClientController extends BaseController {
     }
 
     @PutMapping(value = "/update")
-    @ApiOperation("Добавление клиента")
+    @ApiOperation("Изменение клиента")
     public ResponseEntity<?> update(@ApiParam("Обновление клиента")
                                         @RequestParam Long id,
                                         @RequestBody ClientRequest clientRequest)  {
@@ -50,6 +50,13 @@ public class ClientController extends BaseController {
         return buildResponse(SuccessResponse
                 .builder().message("deleted")
                 .build(), HttpStatus.OK);
+    }
+
+
+    @GetMapping(value = "/get/single")
+    @ApiOperation("Получение одного клиента с контактами")
+    public ResponseEntity<?> getOneClient(@RequestParam Long id){
+        return buildResponse(clientService.getClientWithAllContactInfo(id), HttpStatus.OK);
     }
 
 }

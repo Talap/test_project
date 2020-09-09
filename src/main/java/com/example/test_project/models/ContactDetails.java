@@ -1,6 +1,7 @@
 package com.example.test_project.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.Optional;
 
 @ApiModel(description = "Model of tickets user for parking")
 @Entity
@@ -33,10 +33,10 @@ public class ContactDetails extends AuditModel{
     @ApiModelProperty(notes = "Вид телефона")
     private ContactType contactType;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "clients")
     private Client client;
 
-    public ContactDetails(String phoneNumber, ContactType contactType, Optional<Client> client) {
-    }
+
 }

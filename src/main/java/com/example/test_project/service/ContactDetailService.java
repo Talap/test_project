@@ -4,9 +4,10 @@ import com.example.test_project.controller.exception.ServiceException;
 import com.example.test_project.models.ContactDetails;
 import com.example.test_project.models.Requests.ContactDetailRequest;
 
+import java.util.List;
+
 public interface ContactDetailService {
     ContactDetails addContactDetailById(ContactDetailRequest contactDetailRequest) throws ServiceException;
     ContactDetails updateContactDetailById(ContactDetailRequest contactDetailRequest, Long contactDetailId) throws ServiceException;
     void deleteContactDetailById(Long id);
-
 }
