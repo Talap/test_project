@@ -41,5 +41,8 @@ public class Client extends AuditModel{
 
 
     public Client(String firstName, String secondName, String patronymic) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.patronymic = patronymic;
     }
 }

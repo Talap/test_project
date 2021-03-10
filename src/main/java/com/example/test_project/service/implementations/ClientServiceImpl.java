@@ -9,12 +9,20 @@ import com.example.test_project.models.responses.ContactDetailResponse;
 import com.example.test_project.repository.ClientRepository;
 import com.example.test_project.repository.ContactDetailsRepository;
 import com.example.test_project.service.ClientService;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
 
 @AllArgsConstructor
 @Service
@@ -22,6 +30,7 @@ import java.util.stream.Collectors;
 public class ClientServiceImpl implements ClientService {
     private ClientRepository clientRepository;
     private ContactDetailsRepository contactDetailsRepository;
+    private final Multimap<Long, DeferredResult<?>> watchRequests = Multimaps.synchronizedSetMultimap(HashMultimap.create());
 
     @Override
     public Client createClient(ClientRequest clientRequest)  {
